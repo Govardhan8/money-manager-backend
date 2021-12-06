@@ -33,6 +33,7 @@ router
 	.put(async (request, response) => {
 		const { id } = request.params
 		const body = request.body
+		body.date = new Date(body.date)
 		const updatedTransaction = await updateTransactionByID(id, body)
 		const result = await getTransactionById(id)
 		response.send(result)
