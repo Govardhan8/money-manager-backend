@@ -9,8 +9,11 @@ import {
 
 const router = express.Router()
 
-router.route('/').get(async (request, response) => {
-	const result = await getTransactions()
+router.route('/').post(async (request, response) => {
+	const result = await getTransactions(request.body)
+	result.forEach(
+		(transaction) => (transaction.timestamp = transaction._id.getTimestamp())
+	)
 	response.send(result)
 })
 

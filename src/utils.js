@@ -28,8 +28,12 @@ async function addRecord(body) {
 	return await client.db('myDB').collection('transactions').insertOne(body)
 }
 
-async function getTransactions() {
-	return await client.db('myDB').collection('transactions').find({}).toArray()
+async function getTransactions(filter) {
+	return await client
+		.db('myDB')
+		.collection('transactions')
+		.find(filter)
+		.toArray()
 }
 
 async function getTransactionById(id) {
