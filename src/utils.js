@@ -4,26 +4,7 @@ import { ObjectId } from 'mongodb'
 
 //Utility functions
 
-async function hashPassword(password) {
-	const numberOfRounds = 10
-	const salt = await bcrypt.genSalt(numberOfRounds)
-	const HashedPassword = await bcrypt.hash(password, salt)
-	return HashedPassword
-}
-
-async function addUser(body) {
-	return await client.db('myDB').collection('users').insertOne(body)
-}
-
-async function userExists(name) {
-	const result = await client
-		.db('myDB')
-		.collection('users')
-		.find({ username: name })
-		.toArray()
-	return result
-}
-
+//For Transactions route
 async function addRecord(body) {
 	return await client.db('myDB').collection('transactions').insertOne(body)
 }
@@ -56,6 +37,28 @@ async function deleteTransactionById(id) {
 		.collection('transactions')
 		.deleteOne({ _id: ObjectId(id) })
 }
+
+//For users route
+async function hashPassword(password) {
+	const numberOfRounds = 10
+	const salt = await bcrypt.genSalt(numberOfRounds)
+	const HashedPassword = await bcrypt.hash(password, salt)
+	return HashedPassword
+}
+
+async function addUser(body) {
+	return await client.db('myDB').collection('users').insertOne(body)
+}
+
+async function userExists(name) {
+	const result = await client
+		.db('myDB')
+		.collection('users')
+		.find({ username: name })
+		.toArray()
+	return result
+}
+
 async function getBalance() {
 	return await client
 		.db('myDB')

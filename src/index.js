@@ -14,7 +14,9 @@ const PORT = process.env.PORT
 app.listen(PORT, () => {
 	console.log('App running on port', PORT)
 })
+//Users route (currently not being used)
 app.use('/users', usersRouter)
+//Transactions route
 app.use('/transactions', transactionsRouter)
 
 // To connect to atlas mongoDB
